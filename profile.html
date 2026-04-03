@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VocabApp | Профіль</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:100%;">
+    <a href="index.html" class="navbar-brand">Vocab<span>App</span></a>
+    <ul style="list-style:none;display:flex;gap:4px;align-items:center;">
+      <li><a class="nav-link" href="index.html">Про додаток</a></li>
+      <li><a class="nav-link" href="register.html">Реєстрація</a></li>
+      <li><a class="nav-link" href="login.html">Вхід</a></li>
+      <li><a class="nav-link active" href="profile.html">Профіль</a></li>
+      <li><a class="nav-link" href="study.html">Навчання</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main style="position:relative;overflow:hidden;">
+  <div class="hero-glow"></div>
+  <div style="max-width:640px;margin:0 auto;padding:4rem 1.5rem;">
+
+    <!-- NOT logged in -->
+    <div id="profile-guest" style="display:none;text-align:center;padding:4rem 0;">
+      <div style="font-size:3rem;margin-bottom:1rem;">🔒</div>
+      <h2 style="margin-bottom:0.5rem;">Ви не авторизовані</h2>
+      <p style="color:var(--text-muted);margin-bottom:2rem;">Увійдіть або зареєструйтесь, щоб переглянути профіль.</p>
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <a href="login.html" class="btn-primary-custom">Увійти →</a>
+        <a href="register.html" class="btn-ghost">Реєстрація</a>
+      </div>
+    </div>
+
+    <!-- Logged in -->
+    <div id="profile-content">
+
+      <div style="text-align:center;margin-bottom:2.5rem;" class="fade-up">
+        <div class="avatar-ring" style="margin-bottom:1rem;">👤</div>
+        <h2 id="profile-name-heading" style="font-size:1.6rem;margin-bottom:0.25rem;">—</h2>
+        <p id="profile-email-heading" style="color:var(--text-muted);font-size:0.9rem;">—</p>
+      </div>
+
+      <div class="card fade-up fade-up-1">
+        <div style="padding:1.5rem 1.5rem 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:1rem;">
+          <h3 style="font-size:1rem;font-weight:700;margin:0;">Особисті дані</h3>
+        </div>
+
+        <div class="profile-row">
+          <span class="profile-key">Ім'я</span>
+          <span id="pf-name" class="profile-val">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-key">Email</span>
+          <span id="pf-email" class="profile-val">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-key">Стать</span>
+          <span id="pf-gender" class="profile-val">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-key">Дата народження</span>
+          <span id="pf-birthdate" class="profile-val">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-key">Дата реєстрації</span>
+          <span id="pf-created" class="profile-val" style="color:var(--text-muted);">—</span>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;text-align:center;" class="fade-up fade-up-2">
+        <button id="logout-btn" class="btn-ghost" style="font-size:0.85rem;color:#ff6b6b;border-color:rgba(255,107,107,0.3);">
+          Вийти з акаунту
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2026 <span>VocabApp</span> — усі права захищені</footer>
+
+<script src="js/auth.model.js"></script>
+<script src="js/profile.controller.js"></script>
+</body>
+</html>

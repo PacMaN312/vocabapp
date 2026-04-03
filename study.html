@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VocabApp | Навчання</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .mode-tab {
+      padding: 8px 22px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mode-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    #btn-check:disabled { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:100%;">
+    <a href="index.html" class="navbar-brand">Vocab<span>App</span></a>
+    <ul style="list-style:none;display:flex;gap:4px;align-items:center;">
+      <li><a class="nav-link" href="index.html">Про додаток</a></li>
+      <li><a class="nav-link" href="register.html">Реєстрація</a></li>
+      <li><a class="nav-link" href="login.html">Вхід</a></li>
+      <li><a class="nav-link" href="profile.html">Профіль</a></li>
+      <li><a class="nav-link active" href="study.html">Навчання</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main style="position:relative;overflow:hidden;">
+  <div class="hero-glow"></div>
+  <div style="max-width:600px;margin:0 auto;padding:3.5rem 1.5rem;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:2rem;" class="fade-up">
+      <div class="tag">Сесія навчання</div>
+      <h2 style="font-size:1.8rem;margin-bottom:0.3rem;">Режим вивчення слів</h2>
+    </div>
+
+    <!-- Mode tabs -->
+    <div style="display:flex;gap:8px;margin-bottom:2rem;justify-content:center;" class="fade-up fade-up-1">
+      <button class="mode-tab active" id="tab-study">📘 Вивчення</button>
+      <button class="mode-tab" id="tab-quiz">📝 Тест</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         STUDY PANEL
+    ══════════════════════════════════════════════ -->
+    <div id="study-panel">
+
+      <!-- Progress -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;">
+        <span id="study-progress-text" style="font-size:0.82rem;color:var(--text-muted);">Слово 1 з 10</span>
+        <span style="font-size:0.82rem;color:var(--text-muted);">
+          ✅ Знаю: <strong id="known-count" style="color:var(--accent2);">0</strong>
+        </span>
+      </div>
+      <div class="progress-bar-custom" style="margin-bottom:1.5rem;">
+        <div id="study-progress-fill" class="progress-fill" style="width:10%;"></div>
+      </div>
+
+      <!-- Word card -->
+      <div class="word-card" style="margin-bottom:1.5rem;">
+        <div id="word-main" class="word-main">Apple</div>
+        <div id="word-translation" class="word-translation">Яблуко</div>
+        <div id="word-example" class="word-example">"I eat an apple every morning."</div>
+
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:1.8rem;flex-wrap:wrap;">
+          <button id="btn-prev" class="btn-ghost">← Попереднє</button>
+          <button id="btn-next" class="btn-primary-custom">Наступне →</button>
+        </div>
+      </div>
+
+      <!-- Know / Don't know -->
+      <div style="text-align:center;">
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:0.6rem;">Чи знаєш ти це слово?</p>
+        <div style="display:flex;gap:8px;justify-content:center;">
+          <button id="btn-unknown" class="btn-ghost" style="font-size:0.85rem;color:#ff6b6b;border-color:rgba(255,107,107,0.3);">
+            😕 Не знаю
+          </button>
+          <button id="btn-known" class="btn-ghost" style="font-size:0.85rem;color:var(--accent2);border-color:rgba(66,232,196,0.3);">
+            ✅ Знаю
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         QUIZ PANEL
+    ══════════════════════════════════════════════ -->
+    <div id="quiz-panel" style="display:none;">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;">
+        <span id="quiz-progress-text" style="font-size:0.82rem;color:var(--text-muted);">Питання 1 з 10</span>
+      </div>
+      <div class="progress-bar-custom" style="margin-bottom:1.5rem;">
+        <div id="quiz-progress-fill" class="progress-fill" style="width:10%;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem;font-weight:600;">
+            Оберіть правильний переклад
+          </p>
+          <h3 id="quiz-word" style="font-size:1.8rem;margin-bottom:1.5rem;color:var(--accent);font-family:'Syne',sans-serif;">
+            Apple
+          </h3>
+
+          <div id="quiz-options"></div>
+
+          <div style="display:flex;gap:10px;margin-top:1.2rem;">
+            <button id="btn-check" class="btn-primary-custom" style="flex:1;text-align:center;" disabled>
+              Перевірити
+            </button>
+            <button id="btn-next-q" class="btn-ghost" style="flex:1;text-align:center;display:none;">
+              Далі →
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         RESULT PANEL
+    ══════════════════════════════════════════════ -->
+    <div id="result-panel" style="display:none;">
+      <div class="word-card" style="text-align:center;padding:3rem 2rem;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🎯</div>
+        <h2 style="font-size:2rem;margin-bottom:0.5rem;">Результат тесту</h2>
+        <p style="font-size:3rem;font-family:'Syne',sans-serif;font-weight:800;color:var(--accent);margin:0.5rem 0;">
+          <span id="result-correct">0</span>/<span id="result-total">10</span>
+        </p>
+        <p id="result-msg" style="color:var(--text-muted);margin:1rem 0 2rem;font-size:1rem;"></p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button id="btn-restart" class="btn-primary-custom">🔄 Пройти знову</button>
+          <button id="btn-back-study" class="btn-ghost">📘 До вивчення</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2026 <span>VocabApp</span> — усі права захищені</footer>
+
+<script src="js/study.controller.js"></script>
+</body>
+</html>
